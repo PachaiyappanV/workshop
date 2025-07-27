@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Lora } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
+
+import ReactQueryProvider from "@/react-query";
+import { ThemeProvider } from "@/components/global/theme-provider";
 
 const lora = Lora({
   subsets: ["latin"],
@@ -25,7 +27,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <ReactQueryProvider>{children}</ReactQueryProvider>
         </ThemeProvider>
       </body>
     </html>
