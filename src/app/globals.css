@@ -120,3 +120,26 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Width & Height */
+::-webkit-scrollbar {
+  width: 2px; /* For vertical scrollbar */
+  height: 8px; /* For horizontal scrollbar */
+}
+
+/* Track (background) */
+::-webkit-scrollbar-track {
+  background: #d8d8d8;
+  border-radius: 10px;
+}
+
+/* Handle (thumb) */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

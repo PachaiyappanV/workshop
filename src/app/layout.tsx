@@ -4,6 +4,8 @@ import "./globals.css";
 
 import ReactQueryProvider from "@/react-query";
 import { ThemeProvider } from "@/components/global/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
+import Header from "@/components/global/header";
 
 const lora = Lora({
   subsets: ["latin"],
@@ -19,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${lora.className} bg-background antialiased`}>
         <ThemeProvider
           attribute="class"
@@ -27,7 +29,13 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <ReactQueryProvider>{children}</ReactQueryProvider>
+          <ReactQueryProvider>
+            <Header />
+            <main>
+              {children}
+              <Toaster position="top-right" />
+            </main>
+          </ReactQueryProvider>
         </ThemeProvider>
       </body>
     </html>
