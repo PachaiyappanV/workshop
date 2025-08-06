@@ -10,7 +10,8 @@ export const customerSchema = z.object({
     .string()
     .min(1, "Registration number is required")
     .max(50, "Registration number must be less than 50 characters")
-    .trim(),
+    .trim()
+    .toLowerCase(),
   mobileNo: z.string().min(10, "Mobile number is required").trim(),
   modelName: z
     .string()

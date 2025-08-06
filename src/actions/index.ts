@@ -26,12 +26,42 @@ export const registerCustomer = async (customerData: Customer) => {
 
 export const getCustomers = async () => {
   try {
-    const customers = await prisma.customer.findMany();
+    const customers = (await prisma.customer.findMany()).toSorted((a, b) => {
+      return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
+    });
     return {
       status: 200,
       customers,
     };
   } catch (error) {
     return { status: 500, message: "Failed to fetch customers." };
+  }
+};
+
+export const getCustomer = async (regNo: string) => {
+  try {
+    const customer = await prisma.customer.findUnique({
+      where: {
+        regNo,
+      },
+      include: {
+        services: {
+          include: {
+            serviceCost: true,
+          },
+        },
+      },
+    });
+
+    if (!customer) {
+      return { status: 404, message: "Customer not found." };
+    }
+
+    return {
+      status: 200,
+      customer,
+    };
+  } catch (error) {
+    return { status: 500, message: "Failed to fetch customer." };
   }
 };

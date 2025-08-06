@@ -16,7 +16,7 @@ const RegisterCustomer = () => {
       trigger={
         <Button
           variant="outline"
-          className=" flex items-center text-base gap-2 py-6 px-4 rounded-xl cursor-pointer"
+          className="flex  items-center text-base gap-2 cursor-pointer"
         >
           <Plus className="w-4 h-4" />
           Register Customer

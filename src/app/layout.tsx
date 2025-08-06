@@ -22,7 +22,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${lora.className} bg-background antialiased`}>
+      <body
+        className={`${lora.className} bg-background h-screen flex flex-col antialiased `}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -31,7 +33,7 @@ export default function RootLayout({
         >
           <ReactQueryProvider>
             <Header />
-            <main>
+            <main className="flex-1 container mx-auto px-7 pb-6 ">
               {children}
               <Toaster position="top-right" />
             </main>
