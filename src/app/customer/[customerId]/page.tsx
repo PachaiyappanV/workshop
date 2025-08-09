@@ -1,7 +1,9 @@
 "use client";
 
 import { getCustomer } from "@/actions";
+import AddService from "@/components/global/add-service";
 import CustomerDetails from "@/components/global/customer-details";
+import Services from "@/components/global/services";
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 
@@ -20,8 +22,14 @@ const CustomerPage = ({ params }: { params: { customerId: string } }) => {
   };
 
   return (
-    <div>
+    <div className="h-full w-full flex flex-col gap-2">
       <CustomerDetails customer={customer} />
+      <div className="flex items-center justify-between">
+        <h1 className="text-xl font-semibold ">Services</h1>
+        <AddService />
+      </div>
+
+      <Services customerId={customerId} />
     </div>
   );
 };
