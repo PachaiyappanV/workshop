@@ -23,36 +23,27 @@ model Customer {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   services Service[] // one-to-many relationship with Service
-  serviceCost ServiceCost[] 
+  
 }
 
 model Service {
   id    String @id @default(auto()) @map("_id") @db.ObjectId
   customerId String @db.ObjectId
   serviceType String
-  serviceDate DateTime
-  serviceKM String
-  nextServiceKM String
-  expiryDate DateTime?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  customer Customer @relation(fields: [customerId], references: [id])
-  serviceCost ServiceCost? //one-to-one relationship with ServiceCost
-}
-
-model ServiceCost {
-  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  serviceDate String
+  serviceKM String?
+  nextServiceKM String?
+  expiryDate String?
   sparesDetails String?
   sparesAmount Float?
   serviceCharge Float?
-  totalCost Float
+  totalCost Float?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  serviceId String @unique @db.ObjectId
-  service Service @relation(fields: [serviceId], references: [id])
-  customerId String @db.ObjectId
+
   customer Customer @relation(fields: [customerId], references: [id])
+ 
 }
+
 
 
