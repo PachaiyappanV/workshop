@@ -25,7 +25,7 @@ const CustomerPage = ({ params }: { params: { customerId: string } }) => {
     <div className="h-full w-full flex flex-col gap-2">
       <CustomerDetails customer={customer} />
       <div className="flex items-center justify-between">
-        <h1 className="text-xl font-semibold ">Services</h1>
+        <h1 className="text-2xl font-semibold ">Services</h1>
         <AddService />
       </div>
 

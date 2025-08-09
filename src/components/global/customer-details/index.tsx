@@ -32,7 +32,7 @@ const CustomerDetails = ({ customer, onEdit }: Props) => {
       />
 
       <div className="w-full overflow-x-auto">
-        <h2 className="text-xl font-semibold mb-4">Customer Details</h2>
+        <h2 className="text-2xl font-semibold mb-4">Customer Info</h2>
         <Table>
           <TableHeader>
             <TableRow>

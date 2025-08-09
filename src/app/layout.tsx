@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Lora } from "next/font/google";
+import { Open_Sans } from "next/font/google";
 import "./globals.css";
 
 import ReactQueryProvider from "@/react-query";
@@ -7,7 +7,7 @@ import { ThemeProvider } from "@/components/global/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import Header from "@/components/global/header";
 
-const lora = Lora({
+const openSans = Open_Sans({
   subsets: ["latin"],
 });
 export const metadata: Metadata = {
@@ -23,17 +23,17 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${lora.className} bg-background h-screen flex flex-col antialiased `}
+        className={`${openSans.className} bg-background h-screen flex flex-col antialiased `}
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >
           <ReactQueryProvider>
             <Header />
-            <main className="flex-1 container mx-auto px-7 pb-6 ">
+            <main className="flex-1 px-7 pb-2 ">
               {children}
               <Toaster position="top-right" />
             </main>

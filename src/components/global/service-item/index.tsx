@@ -31,29 +31,29 @@ const ServiceItem = ({ service }: Props) => {
     <div className="flex flex-col md:flex-row border rounded-md p-4 gap-6">
       {/* Left: Service Info */}
       <div className="flex-1">
-        <h3 className="font-semibold mb-2">Service Details</h3>
+        <h3 className="font-bold text-lg mb-2">Service Details</h3>
         <Table>
           <TableBody>
             <TableRow>
-              <TableCell className="font-medium">Type</TableCell>
+              <TableCell className="font-bold">Type</TableCell>
               <TableCell>{serviceType}</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell className="font-medium">Date</TableCell>
+              <TableCell className="font-bold">Date</TableCell>
               <TableCell>
                 {new Date(serviceDate).toLocaleDateString()}
               </TableCell>
             </TableRow>
             <TableRow>
-              <TableCell className="font-medium">KM</TableCell>
+              <TableCell className="font-bold">KM</TableCell>
               <TableCell>{serviceKM || "—"}</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell className="font-medium">Next KM</TableCell>
+              <TableCell className="font-bold">Next KM</TableCell>
               <TableCell>{nextServiceKM || "—"}</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell className="font-medium">Expiry</TableCell>
+              <TableCell className="font-bold">Expiry</TableCell>
               <TableCell>
                 {expiryDate ? new Date(expiryDate).toLocaleDateString() : "—"}
               </TableCell>
@@ -64,23 +64,23 @@ const ServiceItem = ({ service }: Props) => {
 
       {/* Right: Service Cost */}
       <div className="flex-1">
-        <h3 className="font-semibold mb-2">Service Cost</h3>
+        <h3 className="font-bold text-lg mb-2">Service Cost</h3>
         <Table>
           <TableBody>
             <TableRow>
-              <TableCell className="font-medium">Spares</TableCell>
+              <TableCell className="font-bold">Spares</TableCell>
               <TableCell>{sparesDetails || "—"}</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell className="font-medium">Spares Amount</TableCell>
+              <TableCell className="font-bold">Spares Amount</TableCell>
               <TableCell>₹{sparesAmount}</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell className="font-medium">Service Charge</TableCell>
+              <TableCell className="font-bold">Service Charge</TableCell>
               <TableCell>₹{serviceCharge}</TableCell>
             </TableRow>
             <TableRow>
-              <TableCell className="font-medium">Total</TableCell>
+              <TableCell className="font-bold">Total</TableCell>
               <TableCell className="font-bold">₹{totalCost}</TableCell>
             </TableRow>
           </TableBody>
