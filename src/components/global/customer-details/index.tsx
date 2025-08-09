@@ -22,7 +22,7 @@ type Props = {
 
 const CustomerDetails = ({ customer, onEdit }: Props) => {
   return (
-    <div className="flex gap-6 justify-between pt-5">
+    <div className="flex gap-6 justify-between py-8">
       <Image
         src="/falcon.jpg"
         alt="falcon"
@@ -45,10 +45,16 @@ const CustomerDetails = ({ customer, onEdit }: Props) => {
           </TableHeader>
           <TableBody>
             <TableRow>
-              <TableCell>{customer.name || "—"}</TableCell>
-              <TableCell>{customer.regNo || "—"}</TableCell>
+              <TableCell className="capitalize">
+                {customer.name || "—"}
+              </TableCell>
+              <TableCell className="uppercase">
+                {customer.regNo || "—"}
+              </TableCell>
               <TableCell>{customer.mobileNo || "—"}</TableCell>
-              <TableCell>{customer.modelName || "—"}</TableCell>
+              <TableCell className="capitalize">
+                {customer.modelName || "—"}
+              </TableCell>
               <TableCell className="text-right">
                 <Button variant="outline" size="sm" onClick={onEdit}>
                   <Pencil className="w-4 h-4 mr-2" />

@@ -15,7 +15,7 @@ type Props = {
 
 const CustomerCard = ({ customer }: Props) => {
   return (
-    <Link href={`/customer/${customer.id}`}>
+    <Link href={`/customer/${customer.regNo}`}>
       <div className="bg-white/[3%] rounded-lg overflow-hidden relative">
         <div className="relative w-full h-48">
           <Image
@@ -28,22 +28,24 @@ const CustomerCard = ({ customer }: Props) => {
           />
         </div>
 
-        <div className=" p-6 text-center">
-          <h2 className="text-2xl font-semibold">{customer.name}</h2>
-          <p className="italic text-white/75">{customer.regNo}</p>
-          <p className="text-sm text-white/50 mt-4">{customer.modelName}</p>
+        <div className=" p-6 ">
+          <h2 className="text-2xl capitalize font-semibold">{customer.name}</h2>
+          <p className="text-xl text-white/75 uppercase">{customer.regNo}</p>
+          <p className="text-md capitalize text-white/50 mt-2">
+            {customer.modelName}
+          </p>
         </div>
         <div
           className="absolute top-3 left-3 bg-black/30 backdrop-blur 
       px-3 py-1 rounded-lg flex flex-col items-center"
         >
           <p className="text-xl font-bold">
-            {new Date(customer.createdAt).toLocaleDateString("en-US", {
+            {new Date(customer.updatedAt).toLocaleDateString("en-US", {
               day: "2-digit",
             })}
           </p>
           <p className="text-xs uppercase text-accent">
-            {new Date(customer.createdAt).toLocaleDateString("en-US", {
+            {new Date(customer.updatedAt).toLocaleDateString("en-US", {
               month: "short",
             })}
           </p>

@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <header
       className="flex items-center justify-between  border-b 
-    border-white/20 px-3 py-3 sm:px-9 sticky top-0 z-50  backdrop-blur "
+    border-white/20 px-3 py-4 sm:px-9 sticky top-0 z-50  backdrop-blur "
     >
       <Logo />
       <CustomerSearch />

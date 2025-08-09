@@ -20,7 +20,7 @@ const CustomerSearch = () => {
       className="flex items-center gap-x-2 w-full max-w-[400px]"
     >
       <Input type="text" name="regNo" required placeholder="Enter RegNo" />
-      <Button type="submit" variant="outline">
+      <Button className="cursor-pointer" type="submit" variant="outline">
         Search
       </Button>
     </form>
