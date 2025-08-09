@@ -5,10 +5,14 @@ import AddService from "@/components/global/add-service";
 import CustomerDetails from "@/components/global/customer-details";
 import Services from "@/components/global/services";
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import { use } from "react";
 
-const CustomerPage = ({ params }: { params: { customerId: string } }) => {
-  const { customerId } = React.use<{ customerId: string }>(params);
+const CustomerPage = ({
+  params,
+}: {
+  params: Promise<{ customerId: string }>;
+}) => {
+  const { customerId } = use(params);
 
   const { data } = useQuery({
     queryKey: ["customer", customerId],
