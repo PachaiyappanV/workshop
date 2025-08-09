@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 
 type Props = {
-  type?: "text" | "email" | "password" | "number";
+  type?: "text" | "email" | "password" | "number" | "date";
   inputType: "select" | "input" | "textarea";
   options?: { value: string; label: string; id: string }[];
   label?: string;
@@ -44,6 +44,7 @@ const FormGenerator = ({
           <Input
             id={`input-${label}`}
             type={type}
+            step={type === "number" ? "any" : undefined}
             placeholder={placeholder}
             className="bg-transparent border-themeGray text-themeTextGray"
             {...register(name)}
@@ -97,7 +98,7 @@ const FormGenerator = ({
           {label && label}
           <Textarea
             className={cn(
-              "bg-transparent  resize-none h-auto border-themeGray text-themeTextGray",
+              "bg-transparent border-themeGray text-themeTextGray",
               className
             )}
             id={`input-${label}`}
