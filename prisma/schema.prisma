@@ -38,6 +38,7 @@ model Service {
   sparesAmount Float?
   serviceCharge Float?
   totalCost Float?
+  serviceNumber Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
