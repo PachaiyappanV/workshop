@@ -27,8 +27,10 @@ export const registerCustomer = async (customerData: Customer) => {
 
 export const getCustomers = async () => {
   try {
-    const customers = (await prisma.customer.findMany()).toSorted((a, b) => {
-      return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
+    const customers = await prisma.customer.findMany({
+      orderBy: {
+        updatedAt: "desc",
+      },
     });
     return {
       status: 200,
@@ -46,7 +48,11 @@ export const getCustomer = async (regNo: string) => {
         regNo,
       },
       include: {
-        services: true,
+        services: {
+          orderBy: {
+            updatedAt: "desc",
+          },
+        },
       },
     });
 
@@ -65,6 +71,23 @@ export const getCustomer = async (regNo: string) => {
 
 export const addService = async (regNo: string, service: Service) => {
   try {
+    const cust = await prisma.customer.findUnique({
+      where: {
+        regNo,
+      },
+      select: {
+        id: true,
+      },
+    });
+    // Find the last service number for this customer
+    const lastService = await prisma.service.findFirst({
+      where: { customerId: cust?.id },
+      orderBy: { serviceNumber: "desc" },
+      select: { serviceNumber: true },
+    });
+
+    const nextServiceNumber = lastService ? lastService.serviceNumber + 1 : 1;
+
     const customer = await prisma.customer.update({
       where: {
         regNo,
@@ -72,6 +95,7 @@ export const addService = async (regNo: string, service: Service) => {
       data: {
         services: {
           create: {
+            serviceNumber: nextServiceNumber,
             serviceType: service.serviceType,
             serviceDate: service.serviceDate,
             expiryDate: service.expiryDate,
@@ -90,6 +114,60 @@ export const addService = async (regNo: string, service: Service) => {
       return {
         status: 201,
         message: "Service added successfully",
+      };
+    }
+  } catch (error) {
+    console.log(error);
+    return {
+      status: 500,
+      message: "Something went wrong.",
+    };
+  }
+};
+
+export const editService = async (
+  regNo: string,
+  serviceId: string,
+  service: Service
+) => {
+  try {
+    const customer = await prisma.customer.update({
+      where: {
+        regNo,
+      },
+      data: {
+        services: {
+          update: {
+            where: {
+              id: serviceId,
+            },
+            data: {
+              serviceType: service.serviceType,
+              serviceDate: service.serviceDate,
+              expiryDate: service.expiryDate,
+              serviceKM: service.serviceKM,
+              nextServiceKM: service.nextServiceKM,
+              sparesDetails: service.sparesDetails,
+              sparesAmount: service.sparesAmount,
+              serviceCharge: service.serviceCharge,
+              totalCost: service.totalCost,
+            },
+          },
+        },
+      },
+      include: {
+        services: {
+          where: {
+            id: serviceId,
+          },
+        },
+      },
+    });
+
+    if (customer) {
+      return {
+        status: 201,
+        message: `Service ${customer.services[0].serviceNumber} updated successfully`,
       };
     }
   } catch (error) {

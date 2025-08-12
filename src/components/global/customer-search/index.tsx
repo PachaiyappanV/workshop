@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Search } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 const CustomerSearch = () => {
@@ -17,11 +18,16 @@ const CustomerSearch = () => {
   return (
     <form
       onSubmit={onFormSubmit}
-      className="flex items-center gap-x-2 w-full max-w-[400px]"
+      className="flex items-center gap-x-2 md:w-full max-w-[400px]"
     >
       <Input type="text" name="regNo" required placeholder="Enter RegNo" />
-      <Button className="cursor-pointer" type="submit" variant="outline">
-        Search
+      <Button
+        className="cursor-pointer flex  items-center "
+        type="submit"
+        variant="outline"
+      >
+        <Search className="w-4 h-4" />
+        <p className="hidden sm:block">Search</p>
       </Button>
     </form>
   );

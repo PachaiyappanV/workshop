@@ -4,21 +4,54 @@ import FormGenerator from "@/components/global/form-generator";
 import useZodForm from "@/hooks/use-zod-form";
 import { useMutationData } from "@/hooks/use-mutation-data";
 import { Button } from "@/components/ui/button";
-import { addService } from "@/actions";
+import { addService, editService, getCustomer } from "@/actions";
 import { Service, serviceSchema } from "./schema";
 import { useParams } from "next/navigation";
-
-const ServiceForm = () => {
+import { useQuery } from "@tanstack/react-query";
+type Props = {
+  serviceId?: string;
+};
+const ServiceForm = ({ serviceId }: Props) => {
   const params = useParams();
   const customerId = params.customerId as string;
   const { mutate, isPending } = useMutationData(
-    ["add-service"],
-    (service: Service) => addService(customerId, service),
+    serviceId ? ["edit-service"] : ["add-service"],
+    (service: Service) =>
+      serviceId
+        ? editService(customerId, serviceId, service)
+        : addService(customerId, service),
     () => {},
     [["customer", customerId]]
   );
 
-  const { register, errors, onFormSubmit } = useZodForm(serviceSchema, mutate);
+  const { data } = useQuery({
+    queryKey: ["customer", customerId],
+    queryFn: () => getCustomer(customerId),
+  });
+  let defaultValues = {};
+  if (serviceId) {
+    const service = data?.customer?.services?.find(
+      (service) => service.id === serviceId
+    );
+
+    defaultValues = {
+      serviceType: service?.serviceType,
+      serviceDate: service?.serviceDate,
+      expiryDate: service?.expiryDate,
+      serviceKM: service?.serviceKM,
+      nextServiceKM: service?.nextServiceKM,
+      sparesDetails: service?.sparesDetails,
+      sparesAmount: service?.sparesAmount,
+      serviceCharge: service?.serviceCharge,
+      totalCost: service?.totalCost,
+    };
+  }
+
+  const { register, errors, onFormSubmit } = useZodForm(
+    serviceSchema,
+    mutate,
+    serviceId ? defaultValues : {}
+  );
   return (
     <form onSubmit={onFormSubmit} className="flex gap-4">
       <div className="flex flex-col  gap-y-6 p-3 w-1/2 ">

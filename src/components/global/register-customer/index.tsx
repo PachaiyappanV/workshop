@@ -16,10 +16,10 @@ const RegisterCustomer = () => {
       trigger={
         <Button
           variant="outline"
-          className="flex  items-center text-base gap-2 cursor-pointer"
+          className="flex  items-center text-base cursor-pointer "
         >
           <Plus className="w-4 h-4" />
-          Register Customer
+          <p className="hidden sm:block">Register</p>
         </Button>
       }
     >
