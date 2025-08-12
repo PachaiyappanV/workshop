@@ -7,8 +7,7 @@ import {
   TableBody,
   TableCell,
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { Pencil } from "lucide-react";
+import EditCustomer from "../edit-customer";
 
 type Props = {
   customer: {
@@ -17,10 +16,9 @@ type Props = {
     mobileNo: string | undefined;
     modelName: string | undefined;
   };
-  onEdit?: () => void; // Optional edit handler
 };
 
-const CustomerDetails = ({ customer, onEdit }: Props) => {
+const CustomerDetails = ({ customer }: Props) => {
   return (
     <div className="flex gap-6 justify-between py-8">
       <Image
@@ -56,10 +54,7 @@ const CustomerDetails = ({ customer, onEdit }: Props) => {
                 {customer.modelName || "—"}
               </TableCell>
               <TableCell className="text-right">
-                <Button variant="outline" size="sm" onClick={onEdit}>
-                  <Pencil className="w-4 h-4 mr-2" />
-                  Edit
-                </Button>
+                <EditCustomer />
               </TableCell>
             </TableRow>
           </TableBody>

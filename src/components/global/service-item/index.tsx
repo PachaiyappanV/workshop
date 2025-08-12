@@ -46,7 +46,9 @@ const ServiceItem = ({ service }: Props) => {
             <TableBody>
               <TableRow>
                 <TableCell className="font-bold">Type</TableCell>
-                <TableCell>{serviceType}</TableCell>
+                <TableCell className="overflow-x-auto block max-w-[700px]">
+                  {serviceType}
+                </TableCell>
               </TableRow>
               <TableRow>
                 <TableCell className="font-bold">Date</TableCell>

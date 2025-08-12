@@ -3,17 +3,40 @@ import useZodForm from "@/hooks/use-zod-form";
 import { customerSchema, Customer } from "./schema";
 import { useMutationData } from "@/hooks/use-mutation-data";
 import { Button } from "@/components/ui/button";
-import { registerCustomer } from "@/actions";
+import { editCustomer, getCustomer, registerCustomer } from "@/actions";
+import { useParams } from "next/navigation";
+import { useQuery } from "@tanstack/react-query";
+type Props = {
+  isEdit?: boolean;
+};
+const CustomerForm = ({ isEdit }: Props) => {
+  const params = useParams();
+  const customerId = params.customerId as string;
 
-const CustomerForm = () => {
   const { mutate, isPending } = useMutationData(
-    ["register-customer"],
-    (customer: Customer) => registerCustomer(customer),
+    isEdit ? ["edit-customer"] : ["register-customer"],
+    (customer: Customer) =>
+      isEdit ? editCustomer(customerId, customer) : registerCustomer(customer),
     () => {},
-    [["customers"]]
+    isEdit ? [["customer", customerId]] : [["customers"]]
   );
 
-  const { register, errors, onFormSubmit } = useZodForm(customerSchema, mutate);
+  const { data } = useQuery({
+    queryKey: ["customer", customerId],
+    queryFn: () => getCustomer(customerId),
+  });
+  const defaultValues = {
+    name: data?.customer?.name,
+    regNo: data?.customer?.regNo,
+    mobileNo: data?.customer?.mobileNo,
+    modelName: data?.customer?.modelName,
+  };
+
+  const { register, errors, onFormSubmit } = useZodForm(
+    customerSchema,
+    mutate,
+    isEdit ? defaultValues : {}
+  );
   return (
     <form onSubmit={onFormSubmit} className="flex flex-col  gap-y-6 p-3">
       <FormGenerator
@@ -58,7 +81,13 @@ const CustomerForm = () => {
         className="text-base w-[30%] cursor-pointer"
         variant="outline"
       >
-        {isPending ? "Registering..." : "Submit"}
+        {isPending
+          ? isEdit
+            ? "Editing..."
+            : "Registering..."
+          : isEdit
+          ? "Edit"
+          : "Register"}
       </Button>
     </form>
   );

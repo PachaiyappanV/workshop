@@ -106,7 +106,13 @@ const ServiceForm = ({ serviceId }: Props) => {
           className="text-base w-[30%] cursor-pointer"
           variant="outline"
         >
-          {isPending ? "Submitting" : "Submit"}
+          {isPending
+            ? serviceId
+              ? "Editing..."
+              : "Adding..."
+            : serviceId
+            ? "Edit"
+            : "Add"}
         </Button>
       </div>
       <div className="flex flex-col w-1/2  gap-y-6 p-3">

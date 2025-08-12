@@ -25,6 +25,25 @@ export const registerCustomer = async (customerData: Customer) => {
   }
 };
 
+export const editCustomer = async (regNo: string, customerData: Customer) => {
+  try {
+    const customer = await prisma.customer.update({
+      where: {
+        regNo,
+      },
+      data: customerData,
+    });
+    if (customer) {
+      return {
+        status: 200,
+        message: "Customer updated successfully",
+      };
+    }
+  } catch (error) {
+    return { status: 500, message: "Something went wrong." };
+  }
+};
+
 export const getCustomers = async () => {
   try {
     const customers = await prisma.customer.findMany({
@@ -166,7 +185,7 @@ export const editService = async (
 
     if (customer) {
       return {
-        status: 201,
+        status: 200,
         message: `Service ${customer.services[0].serviceNumber} updated successfully`,
       };
     }
