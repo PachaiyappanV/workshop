@@ -20,7 +20,7 @@ type Props = {
 
 const CustomerDetails = ({ customer }: Props) => {
   return (
-    <div className="flex gap-6 justify-between py-8">
+    <div className="flex flex-col sm:flex-row gap-6 sm:justify-between py-8">
       <Image
         src="/falcon.jpg"
         alt="falcon"
@@ -29,8 +29,12 @@ const CustomerDetails = ({ customer }: Props) => {
         className="rounded-md object-cover"
       />
 
-      <div className="w-full overflow-x-auto">
-        <h2 className="text-2xl font-semibold mb-4">Customer Info</h2>
+      <div className="w-full overflow-x-auto hidden sm:block">
+        <div className="flex justify-between items-baseline">
+          <h2 className="text-2xl font-semibold mb-4 ">Customer Info</h2>
+          <EditCustomer />
+        </div>
+
         <Table>
           <TableHeader>
             <TableRow>
@@ -38,7 +42,6 @@ const CustomerDetails = ({ customer }: Props) => {
               <TableHead>Reg. No</TableHead>
               <TableHead>Mobile No</TableHead>
               <TableHead>Model Name</TableHead>
-              <TableHead className="text-right">Actions</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -53,8 +56,37 @@ const CustomerDetails = ({ customer }: Props) => {
               <TableCell className="capitalize">
                 {customer.modelName || "—"}
               </TableCell>
-              <TableCell className="text-right">
-                <EditCustomer />
+            </TableRow>
+          </TableBody>
+        </Table>
+      </div>
+      <div className="flex-1 sm:hidden">
+        <div className="flex justify-between items-baseline">
+          <h2 className="text-2xl font-semibold mb-4 ">Customer Info</h2>
+          <EditCustomer />
+        </div>
+        <Table>
+          <TableBody>
+            <TableRow>
+              <TableCell className="font-bold">Name</TableCell>
+              <TableCell className="capitalize">
+                {customer.name || "—"}
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className="font-bold">Reg. No</TableCell>
+              <TableCell className="uppercase">
+                {customer.regNo || "—"}
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className="font-bold">Mobile No</TableCell>
+              <TableCell>{customer.mobileNo || "—"}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className="font-bold">Model Name</TableCell>
+              <TableCell className="capitalize">
+                {customer.modelName || "—"}
               </TableCell>
             </TableRow>
           </TableBody>

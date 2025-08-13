@@ -11,7 +11,7 @@ const AddService = () => {
     <Modal
       title="Add Service"
       description="Fill in the details to add a new service."
-      className="sm:max-w-3xl"
+      className=" sm:max-w-xl md:max-w-3xl max-sm:px-2"
       trigger={
         <Button
           variant="outline"

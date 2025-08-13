@@ -16,7 +16,7 @@ const EditCustomer = () => {
       trigger={
         <Button
           variant="outline"
-          className="flex items-center text-base cursor-pointer ml-auto"
+          className="flex items-center text-base cursor-pointer"
         >
           <Pencil className="w-4 h-4" />
           <p>Edit</p>

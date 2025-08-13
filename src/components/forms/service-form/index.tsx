@@ -53,8 +53,8 @@ const ServiceForm = ({ serviceId }: Props) => {
     serviceId ? defaultValues : {}
   );
   return (
-    <form onSubmit={onFormSubmit} className="flex gap-4">
-      <div className="flex flex-col  gap-y-6 p-3 w-1/2 ">
+    <form onSubmit={onFormSubmit} className="flex sm:gap-4">
+      <div className="flex flex-col  gap-y-6 p-[2px] sm:p-3 w-1/2 ">
         <FormGenerator
           inputType="input"
           type="text"
@@ -115,7 +115,7 @@ const ServiceForm = ({ serviceId }: Props) => {
             : "Add"}
         </Button>
       </div>
-      <div className="flex flex-col w-1/2  gap-y-6 p-3">
+      <div className="flex flex-col w-1/2 p-[2px] gap-y-6  sm:p-3">
         <FormGenerator
           inputType="input"
           type="text"
