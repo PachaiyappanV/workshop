@@ -8,6 +8,7 @@ type Props = {
     regNo: string;
     mobileNo: string;
     modelName: string;
+    image: string | null;
     createdAt: Date;
     updatedAt: Date;
   };
@@ -19,7 +20,7 @@ const CustomerCard = ({ customer }: Props) => {
       <div className="bg-white/[3%] rounded-lg overflow-hidden relative">
         <div className="relative w-full h-48">
           <Image
-            src="/falcon.jpg"
+            src={customer.image || "/falcon.jpg"}
             alt={customer.name}
             fill
             objectFit="cover"
@@ -44,7 +45,7 @@ const CustomerCard = ({ customer }: Props) => {
               day: "2-digit",
             })}
           </p>
-          <p className="text-xs uppercase text-accent">
+          <p className="text-xs uppercase text-white/70">
             {new Date(customer.updatedAt).toLocaleDateString("en-US", {
               month: "short",
             })}

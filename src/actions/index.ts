@@ -197,3 +197,19 @@ export const editService = async (
     };
   }
 };
+
+export async function getCustomerImage(regNo: string) {
+  const customer = await prisma.customer.findUnique({
+    where: { regNo },
+    select: { image: true },
+  });
+  return customer?.image || null;
+}
+
+export async function updateCustomerImage(regNo: string, imageUrl: string) {
+  await prisma.customer.update({
+    where: { regNo },
+    data: { image: imageUrl },
+  });
+  return { success: true };
+}

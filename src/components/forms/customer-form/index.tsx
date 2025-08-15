@@ -6,9 +6,11 @@ import { Button } from "@/components/ui/button";
 import { editCustomer, getCustomer, registerCustomer } from "@/actions";
 import { useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
+
 type Props = {
   isEdit?: boolean;
 };
+
 const CustomerForm = ({ isEdit }: Props) => {
   const params = useParams();
   const customerId = params.customerId as string;
@@ -24,6 +26,7 @@ const CustomerForm = ({ isEdit }: Props) => {
   const { data } = useQuery({
     queryKey: ["customer", customerId],
     queryFn: () => getCustomer(customerId),
+    enabled: isEdit,
   });
   const defaultValues = {
     name: data?.customer?.name,
@@ -37,6 +40,7 @@ const CustomerForm = ({ isEdit }: Props) => {
     mutate,
     isEdit ? defaultValues : {}
   );
+
   return (
     <form onSubmit={onFormSubmit} className="flex flex-col  gap-y-6 p-3">
       <FormGenerator
@@ -75,6 +79,7 @@ const CustomerForm = ({ isEdit }: Props) => {
         register={register}
         errors={errors}
       />
+
       <Button
         type="submit"
         disabled={isPending}

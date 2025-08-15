@@ -1,4 +1,3 @@
-import Image from "next/image";
 import {
   Table,
   TableHeader,
@@ -8,6 +7,7 @@ import {
   TableCell,
 } from "@/components/ui/table";
 import EditCustomer from "../edit-customer";
+import CustomerImageUploader from "../customer-image-uploader";
 
 type Props = {
   customer: {
@@ -21,13 +21,7 @@ type Props = {
 const CustomerDetails = ({ customer }: Props) => {
   return (
     <div className="flex flex-col sm:flex-row gap-6 sm:justify-between py-8">
-      <Image
-        src="/falcon.jpg"
-        alt="falcon"
-        width={150}
-        height={150}
-        className="rounded-md object-cover"
-      />
+      <CustomerImageUploader regNo={customer.regNo || ""} />
 
       <div className="w-full overflow-x-auto hidden sm:block">
         <div className="flex justify-between items-baseline">
