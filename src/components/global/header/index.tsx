@@ -1,6 +1,7 @@
 import CustomerSearch from "../customer-search";
 import Logo from "../logo";
 import RegisterCustomer from "../register-customer";
+import ThemeToggle from "../theme-toggle";
 
 const Header = () => {
   return (
@@ -11,9 +12,12 @@ const Header = () => {
       <Logo />
       <CustomerSearch />
 
-      <ul className="flex gap-x-6 text-sm h-full">
+      <ul className="flex gap-x-2 text-sm h-full">
         <li>
           <RegisterCustomer />
+        </li>
+        <li>
+          <ThemeToggle />
         </li>
       </ul>
     </header>

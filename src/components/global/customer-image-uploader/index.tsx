@@ -18,6 +18,7 @@ export default function CustomerImageUploader({ regNo }: { regNo: string }) {
       options={{
         multiple: false,
         cropping: true,
+        croppingAspectRatio: 0.5,
       }}
     >
       {({ open }) => (
@@ -27,8 +28,8 @@ export default function CustomerImageUploader({ regNo }: { regNo: string }) {
           }}
           src={imageUrl || "/falcon.jpg"}
           alt="Customer"
-          width={150}
-          height={150}
+          width={300}
+          height={180}
           className="rounded-md object-cover"
         />
       )}
