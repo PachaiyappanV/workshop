@@ -1,6 +1,4 @@
 "use client";
-
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -16,7 +14,10 @@ const CustomerSearch = () => {
   };
 
   return (
-    <form onSubmit={onFormSubmit} className="relative md:w-full max-w-[350px]">
+    <form
+      onSubmit={onFormSubmit}
+      className="relative md:w-full max-sm:max-w-[200px] max-w-[350px]"
+    >
       <Input
         type="text"
         name="regNo"

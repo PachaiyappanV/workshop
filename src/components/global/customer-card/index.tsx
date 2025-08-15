@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 type Props = {
   customer: {
@@ -18,19 +18,12 @@ type Props = {
 };
 
 export default function CustomerCard({ customer }: Props) {
-  const [loading, setLoading] = useState(true);
-
   // Parallax refs/state
   const imgWrapRef = useRef<HTMLDivElement | null>(null);
   const innerRef = useRef<HTMLDivElement | null>(null);
   const rafRef = useRef<number | null>(null);
   const targetRef = useRef({ rx: 0, ry: 0, tx: 0, ty: 0 });
   const currentRef = useRef({ rx: 0, ry: 0, tx: 0, ty: 0 });
-
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 650); // faster skeleton
-    return () => clearTimeout(timer);
-  }, []);
 
   // Smoothly interpolate current -> target
   useEffect(() => {
@@ -99,85 +92,64 @@ export default function CustomerCard({ customer }: Props) {
             shadow-md dark:shadow-lg
             transition-transform duration-400 ease-out group-hover:-translate-y-1"
         >
-          {loading ? (
-            /* skeleton (shimmer) */
-            <div className="animate-pulse select-none">
-              <div className="h-48 bg-gray-200 dark:bg-neutral-800 w-full rounded-t-lg relative overflow-hidden">
-                <div className="absolute inset-0 skeleton-shimmer rounded-t-lg" />
-              </div>
-              <div className="p-6 space-y-3">
-                <div className="h-6 bg-gray-200 dark:bg-neutral-800 rounded w-3/4 relative overflow-hidden">
-                  <div className="absolute inset-0 skeleton-shimmer rounded" />
-                </div>
-                <div className="h-4 bg-gray-200 dark:bg-neutral-800 rounded w-1/2 relative overflow-hidden">
-                  <div className="absolute inset-0 skeleton-shimmer rounded" />
-                </div>
-                <div className="h-4 bg-gray-200 dark:bg-neutral-800 rounded w-2/3 relative overflow-hidden">
-                  <div className="absolute inset-0 skeleton-shimmer rounded" />
-                </div>
-              </div>
-              <div className="absolute top-3 left-3 h-10 w-12 bg-gray-200 dark:bg-neutral-800 rounded-lg" />
-            </div>
-          ) : (
-            <>
-              {/* Image area */}
+          <>
+            {/* Image area */}
+            <div
+              ref={imgWrapRef}
+              onMouseMove={handleMove}
+              onMouseLeave={handleLeave}
+              className="relative w-full h-48 overflow-hidden bg-gray-50 dark:bg-black/20 "
+            >
+              {/* innerRef is transformed via rAF for smooth parallax */}
               <div
-                ref={imgWrapRef}
-                onMouseMove={handleMove}
-                onMouseLeave={handleLeave}
-                className="relative w-full h-48 overflow-hidden bg-gray-50 dark:bg-black/20"
+                ref={innerRef}
+                className="absolute inset-0 transition-transform duration-300 will-change-transform"
               >
-                {/* innerRef is transformed via rAF for smooth parallax */}
-                <div
-                  ref={innerRef}
-                  className="absolute inset-0 transition-transform duration-300 will-change-transform"
-                >
-                  <Image
-                    src={customer.image || "/falcon.jpg"}
-                    alt={customer.name}
-                    fill
-                    className="object-cover w-full h-full"
-                    draggable={false}
-                    priority
-                  />
-                  {/* subtle overlay to ensure contrast on text */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/45 to-transparent opacity-90" />
-                </div>
+                <Image
+                  src={customer.image || "/falcon.jpg"}
+                  alt={customer.name}
+                  fill
+                  className="object-cover w-full h-full "
+                  draggable={false}
+                  priority
+                />
+                {/* subtle overlay to ensure contrast on text */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/45 to-transparent opacity-90" />
               </div>
+            </div>
 
-              {/* Content */}
-              <div className="p-6">
-                <h2 className="text-2xl capitalize font-bold text-gray-900 dark:text-gray-100">
-                  {customer.name}
-                </h2>
-                <p className="text-lg text-gray-600 dark:text-gray-300 uppercase mt-1">
-                  {customer.regNo}
-                </p>
-                <p className="text-sm capitalize text-gray-500 dark:text-gray-400 mt-2">
-                  {customer.modelName}
-                </p>
-              </div>
+            {/* Content */}
+            <div className="p-6">
+              <h2 className="text-2xl capitalize font-bold text-gray-900 dark:text-gray-100">
+                {customer.name}
+              </h2>
+              <p className="text-lg text-gray-600 dark:text-gray-300 uppercase mt-1">
+                {customer.regNo}
+              </p>
+              <p className="text-sm capitalize text-gray-500 dark:text-gray-400 mt-2">
+                {customer.modelName}
+              </p>
+            </div>
 
-              {/* Glass date badge */}
-              <div
-                className="absolute top-3 left-3 px-3 py-1 rounded-lg flex flex-col items-center
+            {/* Glass date badge */}
+            <div
+              className="absolute top-3 left-3 px-3 py-1 rounded-lg flex flex-col items-center
                   backdrop-blur-md bg-white/20 dark:bg-black/30 border border-white/20 dark:border-white/10
                   shadow-[0_6px_20px_rgba(0,0,0,0.18)] text-white transition-transform duration-300
                   group-hover:scale-110"
-              >
-                <p className="text-xl font-bold leading-none drop-shadow-sm">
-                  {new Date(customer.updatedAt).toLocaleDateString("en-US", {
-                    day: "2-digit",
-                  })}
-                </p>
-                <p className="text-[10px] uppercase tracking-widest text-white/85 mt-0.5">
-                  {new Date(customer.updatedAt).toLocaleDateString("en-US", {
-                    month: "short",
-                  })}
-                </p>
-              </div>
-            </>
-          )}
+            >
+              <p className="text-xl font-bold leading-none drop-shadow-sm">
+                {new Date(customer.updatedAt).toLocaleDateString("en-US", {
+                  day: "2-digit",
+                })}
+              </p>
+              <p className="text-[10px] uppercase tracking-widest text-white/85 mt-0.5">
+                {new Date(customer.updatedAt).toLocaleDateString("en-US", {
+                  month: "short",
+                })}
+              </p>
+            </div>
+          </>
         </div>
       </div>
     </Link>

@@ -20,10 +20,10 @@ type Props = {
 
 const CustomerDetails = ({ customer }: Props) => {
   return (
-    <div className="flex flex-col sm:flex-row gap-6 sm:justify-between py-8">
+    <div className="flex flex-col md:flex-row gap-6 md:justify-between pt-5 pb-2">
       <CustomerImageUploader regNo={customer.regNo || ""} />
 
-      <div className="w-full overflow-x-auto hidden sm:block">
+      <div className="w-full overflow-x-auto hidden md:block">
         <div className="flex justify-between items-baseline">
           <h2 className="text-2xl font-semibold mb-4 ">Customer Info</h2>
           <EditCustomer />
@@ -54,7 +54,7 @@ const CustomerDetails = ({ customer }: Props) => {
           </TableBody>
         </Table>
       </div>
-      <div className="flex-1 sm:hidden">
+      <div className="flex-1 md:hidden">
         <div className="flex justify-between items-baseline">
           <h2 className="text-2xl font-semibold mb-4 ">Customer Info</h2>
           <EditCustomer />

@@ -17,8 +17,6 @@ export default function CustomerImageUploader({ regNo }: { regNo: string }) {
       }}
       options={{
         multiple: false,
-        cropping: true,
-        croppingAspectRatio: 0.5,
       }}
     >
       {({ open }) => (
