@@ -40,15 +40,13 @@ const ServiceItem = ({ service }: Props) => {
       </div>
       <div className="flex flex-col md:flex-row gap-6">
         {/* Left: Service Info */}
-        <div className="flex-1">
+        <div className=" w-full md:w-[49%]">
           <h3 className="font-bold text-lg mb-2 ">Details</h3>
           <Table>
             <TableBody>
               <TableRow>
                 <TableCell className="font-bold">Type</TableCell>
-                <TableCell className="overflow-x-auto block max-w-[700px]">
-                  {serviceType}
-                </TableCell>
+                <TableCell>{serviceType}</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell className="font-bold">Date</TableCell>
@@ -75,7 +73,7 @@ const ServiceItem = ({ service }: Props) => {
         </div>
 
         {/* Right: Service Cost */}
-        <div className="flex-1">
+        <div className=" w-full md:w-[49%]">
           <h3 className="font-bold text-lg mb-2">Cost</h3>
           <Table>
             <TableBody>

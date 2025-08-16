@@ -1,10 +1,11 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const Logo = () => {
   return (
-    <div>
-      <Link href="/">Logo</Link>
-    </div>
+    <Link href="/">
+      <Image src="/logo.png" alt="Logo" width={40} height={40} />
+    </Link>
   );
 };
 export default Logo;

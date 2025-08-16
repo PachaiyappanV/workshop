@@ -20,12 +20,12 @@ type Props = {
 
 const CustomerDetails = ({ customer }: Props) => {
   return (
-    <div className="flex flex-col md:flex-row gap-6 md:justify-between pt-5 pb-2">
+    <div className="flex flex-col md:flex-row gap-6 md:justify-between py-8">
       <CustomerImageUploader regNo={customer.regNo || ""} />
 
       <div className="w-full overflow-x-auto hidden md:block">
         <div className="flex justify-between items-baseline">
-          <h2 className="text-2xl font-semibold mb-4 ">Customer Info</h2>
+          <h2 className="text-2xl font-bold mb-4 ">Customer Info</h2>
           <EditCustomer />
         </div>
 

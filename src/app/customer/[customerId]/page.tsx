@@ -29,7 +29,7 @@ const CustomerPage = ({
     <div className="h-full w-full flex flex-col gap-2">
       <CustomerDetails customer={customer} />
       <div className="flex items-center justify-between pb-1">
-        <h1 className="text-2xl font-semibold ">Services</h1>
+        <h1 className="text-2xl font-bold ">Services</h1>
         <AddService />
       </div>
 
