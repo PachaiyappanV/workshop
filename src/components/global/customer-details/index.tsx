@@ -56,7 +56,7 @@ const CustomerDetails = ({ customer }: Props) => {
       </div>
       <div className="flex-1 md:hidden">
         <div className="flex justify-between items-baseline">
-          <h2 className="text-2xl font-semibold mb-4 ">Customer Info</h2>
+          <h2 className="text-2xl font-bold mb-4 ">Customer Info</h2>
           <EditCustomer />
         </div>
         <Table>
