@@ -33,7 +33,7 @@ export default function RootLayout({
         >
           <ReactQueryProvider>
             <Header />
-            <main className="flex-1 px-7 pb-2 ">
+            <main className="flex-1 px-3 sm:px-7 pb-2 ">
               {children}
               <Toaster position="top-right" />
             </main>
