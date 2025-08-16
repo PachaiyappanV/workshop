@@ -28,7 +28,7 @@ export default function CustomerImageUploader({ regNo }: { regNo: string }) {
           alt="Customer"
           width={300}
           height={180}
-          className="rounded-md object-cover"
+          className="rounded-md max-sm:w-full object-cover"
         />
       )}
     </CldUploadWidget>
