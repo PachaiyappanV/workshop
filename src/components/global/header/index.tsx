@@ -12,7 +12,7 @@ const Header = () => {
       <Logo />
       <CustomerSearch />
 
-      <ul className="flex gap-x-1 sm:gap-x-2 text-sm">
+      <ul className="flex gap-x-[6px] sm:gap-x-2 text-sm">
         <li>
           <RegisterCustomer />
         </li>

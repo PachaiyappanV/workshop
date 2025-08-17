@@ -16,7 +16,7 @@ const CustomerSearch = () => {
   return (
     <form
       onSubmit={onFormSubmit}
-      className="relative md:w-full max-sm:max-w-[170px] max-w-[350px]"
+      className="relative md:w-full max-sm:max-w-[200px] max-w-[350px]"
     >
       <Input
         type="text"

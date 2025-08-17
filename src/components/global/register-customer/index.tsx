@@ -14,13 +14,22 @@ const RegisterCustomer = () => {
       title="Register Customer"
       description="Fill in the details to register a new customer."
       trigger={
-        <Button
-          variant="outline"
-          className="flex  items-center text-base cursor-pointer "
-        >
-          <Plus className="w-4 h-4" />
-          <p className="hidden sm:block">Register</p>
-        </Button>
+        <div>
+          <Button
+            variant="outline"
+            className="hidden sm:flex  items-center text-base cursor-pointer "
+          >
+            <Plus className="h-[1.2rem] w-[1.2rem]" />
+            <p>Register</p>
+          </Button>
+          <Button
+            variant="outline"
+            className="cursor-pointer sm:hidden"
+            size={"icon"}
+          >
+            <Plus className="h-[1.2rem] w-[1.2rem]" />
+          </Button>
+        </div>
       }
     >
       <CustomerForm />
