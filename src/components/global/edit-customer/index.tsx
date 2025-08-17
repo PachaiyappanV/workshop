@@ -14,8 +14,8 @@ const EditCustomer = () => {
       title="Edit Customer"
       description="Edit customer Details."
       trigger={
-        <Button variant="outline" className="text-base cursor-pointer">
-          <Pencil className="w-4 h-4" />
+        <Button className="cursor-pointer" variant="outline" size="icon">
+          <Pencil className="h-[1.2rem] w-[1.2rem]" />
         </Button>
       }
     >

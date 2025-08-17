@@ -16,8 +16,8 @@ const EditService = ({ serviceId }: Props) => {
       description="Edit the service details and cost."
       className="sm:max-w-3xl"
       trigger={
-        <Button variant="outline" className="cursor-pointer">
-          <Pencil className="w-4 h-4" />
+        <Button className="cursor-pointer" variant="outline" size="icon">
+          <Pencil className="h-[1.2rem] w-[1.2rem]" />
         </Button>
       }
     >
