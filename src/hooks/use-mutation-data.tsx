@@ -4,6 +4,7 @@ import {
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 export const useMutationData = (
@@ -13,6 +14,7 @@ export const useMutationData = (
   queryKeys?: string[][]
 ) => {
   const client = useQueryClient();
+  const router = useRouter();
   const { mutate, isPending } = useMutation({
     mutationKey,
     mutationFn,
@@ -21,6 +23,10 @@ export const useMutationData = (
 
       if (data?.status == 200 || data?.status == 201) {
         toast.success(data?.message);
+        console.log(data);
+        if (data?.customer?.regNo) {
+          router.push(`/customer/${data?.customer?.regNo}`);
+        }
       } else {
         toast.error(data?.message);
       }

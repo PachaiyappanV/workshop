@@ -10,6 +10,7 @@ export const registerCustomer = async (customerData: Customer) => {
     });
     if (customer) {
       return {
+        customer,
         status: 201,
         message: "Customer registered successfully",
       };
